@@ -1,0 +1,49 @@
+.menu{
+    background-color: $background-light;
+    border-radius: 0%;
+
+    .ui.grid{
+        margin: 0%;
+    }
+
+    &__left,
+    &__right{
+        padding: 0% !important;
+        display: flex !important;
+        align-items: center;
+
+        .ui.menu{
+            border: 0;
+            box-shadow: none;
+            height: 100%;
+            background-color: transparent !important;
+
+            .icon{
+                margin-right: 10px !important;
+                color: $primary;
+            }
+
+            .item{
+                color: $font-dark;
+                border-radius: 0px !important;
+
+                &:hover{
+                    color: $font-dark;
+                    background-color: $background-dark;
+                    &:before{
+                        background-color: $background-dark;
+                    }
+                }
+
+                &.m-0 i {
+                    margin: 0% !important;
+                }
+            }
+        }
+    }
+
+    &__right{
+        display: flex;
+        justify-content: flex-end;
+    }
+}
