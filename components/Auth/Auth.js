@@ -15,5 +15,5 @@ export default function Auth(props) {
         settitleModal('Registrate')
     }
 
-  return showLogin === true ? <LoginForm showRegisterForm={showRegisterForm}/> : <RegisterForm showLoginForm={showLoginForm}/>
+  return showLogin === true ? <LoginForm showRegisterForm={showRegisterForm} onCloseModal={onCloseModal} /> : <RegisterForm showLoginForm={showLoginForm}/>
 }

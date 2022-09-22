@@ -72,7 +72,7 @@ export default function RegisterForm(props) {
             />
             <div>
                 <Button type='submit' className='submit' loading={loading}>Enviar Registro</Button>
-                <Button onClick={showLoginForm}>Iniciar Sesión</Button>
+                <Button type='button' onClick={showLoginForm}>Iniciar Sesión</Button>
             </div>
 
         </Form>

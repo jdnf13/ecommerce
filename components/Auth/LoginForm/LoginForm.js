@@ -4,21 +4,27 @@ import { useFormik } from 'formik';
 import  * as  Yup from 'yup';
 import {loginApi} from '../../../api/user';
 import { toast } from 'react-toastify';
+import useAuth from '../../../hooks/useAuth';
 
 export default function LoginForm(props) {
-    const {showRegisterForm} = props;
+    const {showRegisterForm, onCloseModal} = props;
+    const [loading, setLoading] = useState(false);
+    const {login} = useAuth();
     
     const formik = useFormik({/**Funcion onSubmit para el formulario con formik */
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
         onSubmit: async (formData) => {
+            setLoading(true);
             const response = await loginApi(formData);//aqui enviar data al API
-            console.log(response);
             if(response?.data && response.data.login !== 'fallido'){
                 toast.success('Iniciaste Sesión');
+                login(response.data._id,response.data.name,response.data.mail);
+                onCloseModal();
             }else{
                 toast.error(response.mensaje);
             }
+            setLoading(false);
         }
     });
 
@@ -40,8 +46,10 @@ export default function LoginForm(props) {
                 error={formik.errors.password}
             />         
             <div>
-                <Button type='submit' className='submit'>Iniciar Sesión</Button>
-                <Button onClick={showRegisterForm}>Registrate</Button>
+                <Button type='submit' className='submit' loading={loading}>Iniciar Sesión</Button>
+                <Button type='button' onClick={showRegisterForm}>Registrate</Button>
+                <Button type='button' onClick={showRegisterForm}>¿Has olvidado tu contraseña?</Button>
+
             </div>
         </Form>
     </div>
