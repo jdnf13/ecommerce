@@ -15,7 +15,6 @@ export default function RegisterForm(props) {
         onSubmit: async (formData) => {
             setLoading(true);
             const response = await registerApi(formData);
-            console.log(response)
             if(response?.data && response.data !== null){
                 toast.success('ok');
                 showLoginForm();
