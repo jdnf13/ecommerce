@@ -1,16 +1,31 @@
 import 'react-toastify/dist/ReactToastify.css';
 import '../scss/global.scss';
 import 'semantic-ui-css/semantic.min.css';
-import React, {useMemo, useState} from 'react';
+import React, {useMemo, useState, useEffect} from 'react';
 import {ToastContainer} from 'react-toastify';
 import AuthContext from '../context/AuthContext';
-import { setLogin } from '../api/user';
+import { setLogin, getLogin } from '../api/sesion';
 
 export default function MyApp({ Component, pageProps }) {
 
-  const [auth, setAuth] = useState(undefined)
+  const [auth, setAuth] = useState(undefined);
+  const [reloadUser, setReloadUser] = useState(false)
 
-  console.log(auth);
+  useEffect(() => {
+   const sesion = getLogin();
+   if(sesion){
+    setAuth({
+      _id:sesion._id,
+      name:sesion.name,
+      email:sesion.email
+    });
+   }else{
+    setAuth(null);
+   }
+   setReloadUser(false);
+  }, [reloadUser])
+  
+
   const login = (_id,name,email) => {
     setLogin(_id,name,email);
     setAuth({
@@ -20,13 +35,15 @@ export default function MyApp({ Component, pageProps }) {
 
   const authData = useMemo(/**Solo actualiza el estado cuando algun dato cambie */
     () => ({
-      auth: {name:'JUAN DAVID',email:'jdnf13@gmail.com'},
+      auth,
       login,
       logout: () => null,
-      setReloadUser: () => null
+      setReloadUser
     }),
-    []
+    [auth] //Le indicamos que estara pendiente de los cambios en auth
   );
+
+  if(auth === undefined) return null;
 
   return (
           <AuthContext.Provider value={authData}>

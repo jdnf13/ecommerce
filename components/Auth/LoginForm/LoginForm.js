@@ -10,7 +10,7 @@ export default function LoginForm(props) {
     const {showRegisterForm, onCloseModal} = props;
     const [loading, setLoading] = useState(false);
     const {login} = useAuth();
-    
+
     const formik = useFormik({/**Funcion onSubmit para el formulario con formik */
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
@@ -28,7 +28,17 @@ export default function LoginForm(props) {
         }
     });
 
-    
+    const resetPassword = () => {
+        formik.setErrors({});
+        const validateEmail = Yup.string().email().required('*Para recuperar la contraseña requrimos tu email');
+
+        if(!validateEmail.isValidSync(formik.values.email)){
+            formik.setErrors({email:true})
+        }else{
+            console.log(formik.values.email);
+        }
+
+    }
 
   return (
     <div>
@@ -48,7 +58,7 @@ export default function LoginForm(props) {
             <div>
                 <Button type='submit' className='submit' loading={loading}>Iniciar Sesión</Button>
                 <Button type='button' onClick={showRegisterForm}>Registrate</Button>
-                <Button type='button' onClick={showRegisterForm}>¿Has olvidado tu contraseña?</Button>
+                <Button type='button' onClick={resetPassword}>¿Has olvidado tu contraseña?</Button>
 
             </div>
         </Form>
