@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Button, Form } from 'semantic-ui-react';
 import { useFormik } from 'formik';
 import  * as  Yup from 'yup';
-import {loginApi} from '../../../api/user';
+import {loginApi, resetPasswordApi} from '../../../api/user';
 import { toast } from 'react-toastify';
 import useAuth from '../../../hooks/useAuth';
 
@@ -33,9 +33,9 @@ export default function LoginForm(props) {
         const validateEmail = Yup.string().email().required('*Para recuperar la contraseña requrimos tu email');
 
         if(!validateEmail.isValidSync(formik.values.email)){
-            formik.setErrors({email:true})
+            toast.error('Debes ingresar tu email para recuperar la constraseña');
         }else{
-            console.log(formik.values.email);
+            resetPasswordApi(formik.values.email);
         }
 
     }
