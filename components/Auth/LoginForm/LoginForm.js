@@ -19,7 +19,7 @@ export default function LoginForm(props) {
             const response = await loginApi(formData);//aqui enviar data al API
             if(response?.data && response.data.login !== 'fallido'){
                 toast.success('Iniciaste Sesión');
-                login(response.data._id,response.data.name,response.data.mail);
+                login(response.data._id,`${response.data.name} ${response.data.lastname}`,response.data.mail);
                 onCloseModal();
             }else{
                 toast.error(response.mensaje);
