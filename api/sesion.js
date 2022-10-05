@@ -11,5 +11,8 @@ export function setLogout(){
 }
 
 export function getLogin(){
-    return JSON.parse(localStorage.getItem('token'));
+    if(localStorage.getItem('token'))
+        return JSON.parse(localStorage.getItem('token'));
+    else 
+        return null;
 }

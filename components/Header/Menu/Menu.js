@@ -67,13 +67,31 @@ function Logout(props) {
     const {logout, auth} = props;
     return(
         <MenuWeb>
-            <MenuWeb.Item>
-                <Icon name='user outline'/>
-                {auth.name}
-            </MenuWeb.Item>
-            <MenuWeb.Item onClick={logout}>
+            <Link href="/pedidos">
+                <MenuWeb.Item as='a'>
+                    <Icon name='shopping bag'/>
+                    Mis pedidos
+                </MenuWeb.Item>
+            </Link>
+            <Link href="/favoritos">
+                <MenuWeb.Item as='a'>
+                    <Icon name='like'/>
+                    Lista de Deseos
+                </MenuWeb.Item>
+            </Link>
+            <Link href="/cuenta">
+                <MenuWeb.Item as='a'>
+                    <Icon name='user circle'/>
+                    {auth.name}
+                </MenuWeb.Item>
+            </Link>            
+            <Link href="/carrito">
+                <MenuWeb.Item as='a' className='m-0'>
+                    <Icon name='shopping cart'/>
+                </MenuWeb.Item>
+            </Link>
+            <MenuWeb.Item onClick={logout} className='m-0'>
                 <Icon name='sign-out'/>
-                Cerrar Sesión
             </MenuWeb.Item>
         </MenuWeb>
     )
