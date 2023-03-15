@@ -1,9 +1,13 @@
 @import './colors.scss';
 
-
 //layouts
 @import '../layouts/BasicLayout/BasicLayout.scss';
 
+//pages
+@import '../pages/cuenta.scss';
+@import '../pages/pedidos.scss';
+@import '../pages/favoritos.scss';
+@import '../pages/carrito.scss';
 
 //components
 @import '../components/Header/Header.scss';

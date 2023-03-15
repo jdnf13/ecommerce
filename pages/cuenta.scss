@@ -1,0 +1,12 @@
+.cuenta{
+    &__configuracion {
+        position: relative;
+        padding: 10px;
+
+        .title{
+            width: max-content;
+            background-color: $background-light;
+            color: $font-grey;
+        }
+    }
+}
